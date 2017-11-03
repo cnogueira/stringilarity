@@ -1,18 +1,18 @@
-# Stringlarity
+# Stringilarity
 
-[![Build Status](https://travis-ci.org/cnogueira/stringlarity.svg?branch=master)](https://travis-ci.org/cnogueira/stringlarity)
+[![Build Status](https://travis-ci.org/cnogueira/stringilarity.svg?branch=master)](https://travis-ci.org/cnogueira/stringilarity)
 
 **TODO: Add description**
 
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `stringlarity` to your list of dependencies in `mix.exs`:
+by adding `stringilarity` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:stringlarity, "~> 0.1.0"}
+    {:stringilarity, "~> 0.1.0"}
   ]
 end
 ```

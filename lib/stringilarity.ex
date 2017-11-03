@@ -1,4 +1,7 @@
 defmodule Stringilarity do
+  @moduledoc """
+  Collection of measurement of string similarity/distance functions.
+  """
 
   @doc """
   Computes the Sorensen-dice similarity coefficient
@@ -14,7 +17,7 @@ defmodule Stringilarity do
     ngrams_b = b |> to_ngram_frequency_map(ngram_size)
     ngrams_common_count = count_intersect_freq(ngrams_a, ngrams_b)
 
-    2*ngrams_common_count / (count_freq(ngrams_a) + count_freq(ngrams_b))
+    2 * ngrams_common_count / (count_freq(ngrams_a) + count_freq(ngrams_b))
   end
 
   defp to_ngram_frequency_map(word, ngram_size) do
@@ -28,15 +31,20 @@ defmodule Stringilarity do
   defp n_grams_frequency_map([_head | tail] = list, ngram_size) do
     ngram = list |> Enum.take(ngram_size) |> List.to_string
 
-    n_grams_frequency_map(tail, ngram_size)
-    |> Map.update(ngram, 1, & &1+1)
+    tail
+    |> n_grams_frequency_map(ngram_size)
+    |> Map.update(ngram, 1, & &1 + 1)
   end
 
   # Computes the intersection of two frequency maps, counting for each element
   # the amount it appears in both sets
   defp count_intersect_freq(a, b) when map_size(a) > map_size(b), do: count_intersect_freq(b, a)
   defp count_intersect_freq(freq_a, freq_b) do
-    Enum.reduce(freq_a, 0, fn {key, freq}, acc -> acc + min(freq, Map.get(freq_b, key, 0)) end)
+    map_function = fn {key, freq}, acc ->
+      acc + min(freq, Map.get(freq_b, key, 0))
+    end
+
+    Enum.reduce(freq_a, 0, map_function)
   end
 
   defp count_freq(freq_map) do

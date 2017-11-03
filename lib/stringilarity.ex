@@ -11,6 +11,9 @@ defmodule Stringilarity do
     iex> Stringilarity.dice("night", "nocht")
     0.25
 
+    iex> Stringilarity.dice("NIGHT", "nocht", 1)
+    0.6
+
   """
   def dice(a, b, ngram_size \\ 2) do
     ngrams_a = a |> to_ngram_frequency_map(ngram_size)
@@ -18,6 +21,24 @@ defmodule Stringilarity do
     ngrams_common_count = count_intersect_freq(ngrams_a, ngrams_b)
 
     2 * ngrams_common_count / (count_freq(ngrams_a) + count_freq(ngrams_b))
+  end
+
+  @doc """
+  Computes the Jaccard similarity coefficient
+
+  ## Examples
+
+    iex> Stringilarity.jaccard("Owl", "boWlinG")
+    0.3333333333333333
+
+    iex> Stringilarity.jaccard("Owl", "boWlinG", 1)
+    0.4285714285714286
+
+  """
+  def jaccard(a, b, ngram_size \\ 2) do
+    dice_coeff = dice(a, b, ngram_size)
+
+    dice_coeff / (2 - dice_coeff)
   end
 
   defp to_ngram_frequency_map(word, ngram_size) do

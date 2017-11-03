@@ -1,6 +1,8 @@
 # Stringilarity
 
 [![Build Status](https://travis-ci.org/cnogueira/stringilarity.svg?branch=master)](https://travis-ci.org/cnogueira/stringilarity)
+[![Deps Status](https://beta.hexfaktor.org/badge/all/github/cnogueira/stringilarity.svg)](https://beta.hexfaktor.org/github/cnogueira/stringilarity)
+
 
 **TODO: Add description**
 
